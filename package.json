@@ -1,0 +1,28 @@
+{
+  "name": "FoolVMESS",
+  "version": "1.0.0",
+  "description": "Tools Generate Vmess Account from API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hamma-nyk/FoolVMESS.git"
+  },
+  "keywords": [
+    "vpn"
+  ],
+  "author": "Hamma-nyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hamma-nyk/FoolVMESS/issues"
+  },
+  "homepage": "https://github.com/Hamma-nyk/FoolVMESS#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "figlet": "^1.5.2",
+    "prompt-sync": "^4.2.0",
+    "request": "^2.88.2"
+  }
+}
