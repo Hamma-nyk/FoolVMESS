@@ -36,26 +36,25 @@ function doRequest(country,tls,BugHost) {
                 }else{
                     var tlsStatus = "false";
                 }
+                console.log(chalk.bold.yellow("proxies:"));
                 for (let i in VPNList){
-                    console.log(chalk.bold.yellow(line));
-                    console.log(chalk.bold.cyan(`VMESS [${parseInt(i)+1}] [${VPNList[i].region}] [${VPNList[i].country_code}] [${VPNList[i].org}]`));
-                    console.log(chalk.bold.yellow(line));
-                    console.log(`- name: ${VPNList[i].remark}`)
-                    console.log(`  server: ${BugHost}`)
-                    console.log(`  port: ${VPNList[i].server_port}`)
-                    console.log(`  type: ${VPNList[i].vpn}`)
-                    console.log(`  uuid: ${VPNList[i].uuid}`)
-                    console.log(`  alterId: 0`)
-                    console.log(`  cipher: auto`)
-                    console.log(`  tls: ${tlsStatus}`)
-                    console.log(`  skip-cert-verify: true`)
-                    console.log(`  servername: ${VPNList[i].host}`)
-                    console.log(`  network: ${VPNList[i].transport}`)
-                    console.log(`  ws-opts:`)
-                    console.log(`      path: ${VPNList[i].path}`)
-                    console.log(`      headers:`)
-                    console.log(`          Host: ${VPNList[i].host}`)
-                    console.log(`  udp: true`)
+                    console.log(chalk.bold.cyan(`  # VMESS [${parseInt(i)+1}] [${VPNList[i].region}] [${VPNList[i].country_code}] [${VPNList[i].org}]`));
+                    console.log(`  - name: ${VPNList[i].remark}
+    server: ${BugHost}
+    port: ${VPNList[i].server_port}
+    type: ${VPNList[i].vpn}
+    uuid: ${VPNList[i].uuid}
+    alterId: 0
+    cipher: auto
+    tls: ${tlsStatus}
+    skip-cert-verify: true
+    servername: ${VPNList[i].host}
+    network: ${VPNList[i].transport}
+    ws-opts:
+      path: ${VPNList[i].path}
+      headers:
+        Host: ${VPNList[i].host}
+    udp: true`)
                 }
                 resolve(body);
                 console.log(chalk.bold.yellow(line));
