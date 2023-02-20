@@ -17,7 +17,7 @@ function title() {
     console.log(chalk.red("Credit: http://fool.azurewebsites.net/"));
 }
 
-function doRequest(country,tls) {
+function doRequest(country,tls,BugHost) {
     if (country!=null){
         var urlP = `http://fool.azurewebsites.net/get?vpn=vmess&network=ws&mode=cdn&tls=${tls}&cc=${country}`
     }else{
@@ -38,20 +38,24 @@ function doRequest(country,tls) {
                 }
                 for (let i in VPNList){
                     console.log(chalk.bold.yellow(line));
-                    console.log(chalk.bold.cyan(`VMESS ${parseInt(i)+1}`));
+                    console.log(chalk.bold.cyan(`VMESS [${parseInt(i)+1}] [${VPNList[i].region}] [${VPNList[i].country_code}] [${VPNList[i].org}]`));
                     console.log(chalk.bold.yellow(line));
-                    console.log('UUID     : '+VPNList[i].uuid);
-                    console.log('Host     : '+VPNList[i].host);
-                    console.log('Port     : '+VPNList[i].server_port);
-                    console.log('Path     : '+VPNList[i].path);
-                    console.log('Country  : '+VPNList[i].country_code);
-                    console.log('Region   : '+VPNList[i].region);
-                    console.log('Org      : '+VPNList[i].org);
-                    console.log('Security : '+VPNList[i].security);
-                    console.log(`Tls      : `+tlsStatus);
-                    console.log('Transport: '+VPNList[i].transport);
-                    console.log('Mode     : '+VPNList[i].conn_mode);
-                    console.log('Network  : '+VPNList[i].vpn);
+                    console.log(`- name: ${VPNList[i].remark}`)
+                    console.log(`  server: ${BugHost}`)
+                    console.log(`  port: ${VPNList[i].server_port}`)
+                    console.log(`  type: ${VPNList[i].vpn}`)
+                    console.log(`  uuid: ${VPNList[i].uuid}`)
+                    console.log(`  alterId: 0`)
+                    console.log(`  cipher: auto`)
+                    console.log(`  tls: ${tlsStatus}`)
+                    console.log(`  skip-cert-verify: true`)
+                    console.log(`  servername: ${VPNList[i].host}`)
+                    console.log(`  network: ${VPNList[i].transport}`)
+                    console.log(`  ws-opts:`)
+                    console.log(`      path: ${VPNList[i].path}`)
+                    console.log(`      headers:`)
+                    console.log(`          Host: ${VPNList[i].host}`)
+                    console.log(`  udp: true`)
                 }
                 resolve(body);
                 console.log(chalk.bold.yellow(line));
@@ -72,23 +76,33 @@ function randomChoice(){
     console.clear()
     title(); 
     console.log(chalk.bold.yellow(line));
+    console.log(chalk.cyan(`Edukasi : 104.17.2.81 / 104.17.3.81
+Game    : 104.18.21.94
+You can input your bug host too...`))
+    const BugHost = prompt("Bug host/IP) : ");
+    console.log(chalk.bold.yellow(line));
+    const tls     = prompt("TLS (1/0)    : ");
     const country = null;
-    const tls = prompt("TLS (1/0) : ");
-    doRequest(country,tls);
+    doRequest(country,tls,BugHost);
 }
 
 function customChoice(){
     console.clear()
     title(); 
     console.log(chalk.bold.yellow(line));
-    console.log(`SG : Singapore
-ID : Indonesia
-US : United States
-${chalk.green("Visit website for all list.")}`)
+    console.log(chalk.cyan(`Edukasi : 104.17.2.81 / 104.17.3.81
+Game    : 104.18.21.94
+You can input your bug host too...`))
+    const BugHost = prompt("Bug host/IP) : ");
     console.log(chalk.bold.yellow(line));
+    console.log(`${chalk.cyan(`SG : Singapore
+ID : Indonesia
+US : United States`)}
+${chalk.green("Visit website for all list.")}`)
     const country = prompt("Country Code : ");
+    console.log(chalk.bold.yellow(line));
     const tls     = prompt("TLS (1/0)    : ");
-    doRequest(country,tls);
+    doRequest(country,tls,BugHost);
 }
 function start(){
     title();    
