@@ -3,7 +3,7 @@ const figlet = require('figlet')
 const request = require('request');
 const prompt = require("prompt-sync")({ sigint: false });
 const line = "---------------------------------------------------";
-
+var pass = "";
 function title() {
     console.clear()
     console.log(chalk.bold.green(figlet.textSync('FoolVMESS', {
@@ -19,9 +19,9 @@ function title() {
 
 function doRequest(country,tls,BugHost) {
     if (country!=null){
-        var urlP = `http://fool.azurewebsites.net/get?vpn=vmess&network=ws&mode=cdn&tls=${tls}&cc=${country}`
+        var urlP = `http://fool.azurewebsites.net/get?vpn=vmess&network=ws&mode=cdn&tls=${tls}&cc=${country}&pass=${pass}`
     }else{
-        var urlP = `http://fool.azurewebsites.net/get?vpn=vmess&network=ws&mode=cdn&tls=${tls}`    
+        var urlP = `http://fool.azurewebsites.net/get?vpn=vmess&network=ws&mode=cdn&tls=${tls}&pass=${pass}`    
     }
     return new Promise(function (resolve, reject) {
         request.get({
@@ -78,10 +78,10 @@ function randomChoice(){
     console.log(chalk.cyan(`Edukasi : 104.17.2.81 / 104.17.3.81
 Game    : 104.18.21.94
 You can input your bug host too...`))
-    const BugHost = prompt("Bug host/IP) : ");
+    var BugHost = prompt("Bug host/IP) : ");
     console.log(chalk.bold.yellow(line));
-    const tls     = prompt("TLS (1/0)    : ");
-    const country = null;
+    var tls     = prompt("TLS (1/0)    : ");
+    var country = null;
     doRequest(country,tls,BugHost);
 }
 
@@ -92,16 +92,23 @@ function customChoice(){
     console.log(chalk.cyan(`Edukasi : 104.17.2.81 / 104.17.3.81
 Game    : 104.18.21.94
 You can input your bug host too...`))
-    const BugHost = prompt("Bug host/IP) : ");
+    var BugHost = prompt("Bug host/IP) : ");
     console.log(chalk.bold.yellow(line));
     console.log(`${chalk.cyan(`SG : Singapore
 ID : Indonesia
 US : United States`)}
 ${chalk.green("Visit website for all list.")}`)
-    const country = prompt("Country Code : ");
+    var country = prompt("Country Code : ");
     console.log(chalk.bold.yellow(line));
-    const tls     = prompt("TLS (1/0)    : ");
+    var tls     = prompt("TLS (1/0)    : ");
     doRequest(country,tls,BugHost);
+}
+function userPass(){
+    console.clear()
+    title(); 
+    console.log(chalk.bold.yellow(line));
+    pass = prompt("Input Password : ")
+    console.clear()
 }
 function start(){
     title();    
@@ -112,8 +119,10 @@ function start(){
     console.log(chalk.bold.yellow(line));
     const choose = prompt("Choose Menu : ");
     if(choose=="1"){
+        userPass();
         randomChoice();
     }else if(choose=="2"){
+        userPass();
         customChoice();    
     }else if(choose=="3"){
         console.clear();
